@@ -21,22 +21,22 @@ In fact, the resulting system behavior — especially around low or near-zero co
 is much closer to my expectations than the original Shelly-based integration.
 
 Example IR readers that work well in this setup:
-- Hichi IR reader (https://sites.google.com/view/hichi-lesekopf/startseite)
-
+Hichi IR reader (https://sites.google.com/view/hichi-lesekopf/startseite)
 
 If you're buying an EcoFlow system anyway, you can use my referral link:
+<a href="https://www.ecoflow.com/eu/referral-rewards?inviteCode=AHWULITSY1">www.ecoflow.com</a>
 
-👉 https://www.ecoflow.com/eu/referral-rewards?inviteCode=AHWULITSY1
 ---
 
 ## Introduction
 
 Many EcoFlow users integrate their systems into ioBroker and combine them with
-external smart meters (IR readers, Shelly 3EM, etc.).
+external smart meters (Tibber, Shelly 3EM, etc.).
 
 While EcoFlow offers internal energy management, advanced users often want:
 
-- More accurate grid-based control (smart meter as single source of truth)
+- More accurate grid-based control
+- The ability to use their existing smart meter / IR reader data (instead of adding or replacing hardware)
 - Stable “near-zero import” behavior
 - Reliable Home / Grid values in the EcoFlow app
 - A system that runs 24/7 without manual restarts
@@ -63,6 +63,10 @@ A simple example:
 6. EcoFlow reacts — and the cycle repeats
 
 The result is a **zig-zag / oscillation** instead of a stable near-zero grid import.
+
+<img width="1483" height="294" alt="image" src="https://github.com/user-attachments/assets/46cda105-45dd-4204-b9c9-25ed7b29dcb0" />
+
+
 
 This happens whenever:
 - the same signal is used for **control** *and* **display**
@@ -127,6 +131,11 @@ When SoC is above the configured reserve:
   - output authority detection
   - anti-windup protection
 
+ Example grid import target at 0-20 W:
+<img width="1468" height="466" alt="image" src="https://github.com/user-attachments/assets/71a4641a-2477-4ebc-a0a2-20234d5cd58f" />
+
+
+
 ### 2) Fallback Mode (battery discharge blocked)
 
 When SoC is at or below the configured reserve:
@@ -152,34 +161,26 @@ No manual restarts required.
 - ✅ Works with EcoFlow Stream / Ultra systems
 - ✅ Debug states created in `0_userdata.0.ecoflow.ctrl.*`
 
+States in fallback mode:
+<img width="1547" height="608" alt="image" src="https://github.com/user-attachments/assets/324f42ca-c66b-48ee-b203-d129ff063a4c" />
+
+
 ---
 
 
 ## How It Works (High Level)
 
-    Smart Meter (IR reader)
-      |
-      v
-    ioBroker JavaScript controller
-      |
-      +-- Control Mode (battery allowed)
-      |     -> regulate EcoFlow output to reduce grid import
-      |
-      +-- Fallback Mode (battery blocked at reserve)
-            -> forward raw grid import as display feed
-
-    Breaking the loop (Control vs Display separation)
-
-    +------------------------+
-    | Smart meter (IR)       |
-    +-----------+------------+
-                |
-                v
-         Grid power reading
-                |
-          +-----+-----+
-          |           |
-          v           v
+    
+              +------------------------+
+              |    Smart meter (IR)    |
+              +-----------+------------+
+                          |
+                          v
+                 Grid power reading
+                          |
+          +---------------+---------------+
+          |                               |
+          v                               v
 
     +------------------------+    +------------------------+
     | CONTROL MODE           |    | FALLBACK MODE          |
