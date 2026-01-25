@@ -23,6 +23,10 @@ is much closer to my expectations than the original Shelly-based integration.
 Example IR readers that work well in this setup:
 - Hichi IR reader (https://sites.google.com/view/hichi-lesekopf/startseite)
 
+
+If you're buying an EcoFlow system anyway, you can use my referral link:
+
+👉 https://www.ecoflow.com/eu/referral-rewards?inviteCode=AHWULITSY1
 ---
 
 ## Introduction
