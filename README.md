@@ -20,6 +20,9 @@ This was initially meant as a temporary workaround, but it turned out to work su
 In fact, the resulting system behavior — especially around low or near-zero consumption handling —
 is much closer to my expectations than the original Shelly-based integration.
 
+Screenshot showing stable 0 W import from the grid with real home power usage displayed correctly.<br>
+<img src="https://github.com/user-attachments/assets/e4addede-2bc3-4d18-9558-b3267ba3c3dc" height="480" />
+
 Example IR readers that work well in this setup:
 Hichi IR reader (https://sites.google.com/view/hichi-lesekopf/startseite)
 
