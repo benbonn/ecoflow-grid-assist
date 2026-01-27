@@ -168,6 +168,11 @@ States in fallback mode:
 <img width="1547" height="608" alt="image" src="https://github.com/user-attachments/assets/324f42ca-c66b-48ee-b203-d129ff063a4c" />
 
 States in Control mode:
+
+In this snapshot, the controller setpoint `u_set_w` is ~460 W and EcoFlow is discharging ~455 W.
+As a result, grid import is reduced to only **5 W**, meaning the house is almost fully powered by EcoFlow
+while keeping a stable near-zero grid import.
+
 <img width="1547" height="608" alt="image" src="https://github.com/user-attachments/assets/9e08adcc-203e-465d-9da4-a44f4dd3d7d0" />
 
 
